@@ -4,6 +4,7 @@
 # --------------------------------------------------------------------------------------------
 
 from unittest import TestCase
+import pytest
 from azure_devtools.scenario_tests.preparers import AbstractPreparer
 
 traces = []
@@ -22,7 +23,11 @@ class _TestPreparer(AbstractPreparer):
         traces.append('remove ' + self._name)
 
 
+@pytest.mark.skip(msg="This is not a test")
 class _TestClassSample(TestCase):
+    def __init__(self):
+        super(_TestClassSample, self).__init__('example_test')
+
     @_TestPreparer('A')
     @_TestPreparer('B')
     def example_test(self):
